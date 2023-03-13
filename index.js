@@ -1,5 +1,7 @@
 const { prompt } = require('inquirer');
 const mysql = require('mysql2');
+const fs = require('fs');
+const path = require('path');
 
 const questions = [
   {
@@ -13,10 +15,27 @@ const db = mysql.createConnection(
   {
     host: 'localhost',
     user: 'root',
-    password: 'ColinSpr0wsSux!',
-    database: ''
+    password: 'ColinSpr0wsSux!'
   }
 )
+
+const schema = fs.readFileSync(path.join(__dirname, 'db/schema.sql'), "utf8");
+
+db.query(`${schema}`, (err, result) => {
+  if (err) {
+    console.log(err);
+  }
+  console.log('Schema executed');
+});
+
+const seeds = fs.readFileSync(path.join(__dirname, 'db/seeds.sql'), "utf8");
+
+db.query(`${seeds}`, (err, result) => {
+  if (err) {
+    console.log(err);
+  }
+  console.log('Seeds executed');
+});
 
 const pickSQL= function(answer) {
   if (answer === "View all departments") {
