@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 // SQL commands
 const { selectDepts, selectRoles, selectEmployees, insertDept, insertRole } = require('./helper/sqlCommands');
-const { questions, newDeptQuestions, newRoleQuestions } = require('./helper/inquirerQuestions');
+const { questions, newDeptQuestions, newRoleQuestions, newEmployeeQuestions } = require('./helper/inquirerQuestions');
 
 // create connection with mysql server
 const db = mysql.createConnection(
@@ -78,7 +78,8 @@ const pickSQL = function(answer) {
     })
     // add an employee
   } else if (answer === "Add an employee") {
-
+    prompt(newEmployeeQuestions)
+      .then(answers => )
     // update an employee role
   } else if (answer === "Update an employee role") {
 
