@@ -40,7 +40,7 @@ const pickSQL = function(answer) {
       }
     });
     // add a dept
-  } else if (answer === "Add a dept") {
+  } else if (answer === "Add a department") {
     prompt(newDeptQuestions)
       .then(answers => {
         const { department } = answers;

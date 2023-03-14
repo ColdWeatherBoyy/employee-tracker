@@ -3,7 +3,7 @@ const questions = [
   {
     type: "list",
     message: "Select from options below, please!",
-    choices: ["View all departments", "View all roles", "View all employees", "Add a role", "Add an employee", "Update an employee role"],
+    choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role"],
     name: "selection"
   }
 ];
