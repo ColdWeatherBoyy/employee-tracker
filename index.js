@@ -4,8 +4,8 @@ const mysql = require('mysql2');
 const fs = require('fs');
 const path = require('path');
 // SQL commands
-const { selectDepts, selectRoles, selectEmployees, insertDept, insertRole } = require('./helper/sqlCommands');
-const { questions, newDeptQuestions, newRoleQuestions, newEmployeeQuestions } = require('./helper/inquirerQuestions');
+const { selectDepts, selectRoles, selectEmployees, insertDept, insertRole, insertEmployee, updateEmployeeRole } = require('./helper/sqlCommands');
+const { questions, newDeptQuestions, newRoleQuestions, newEmployeeQuestions, updateEmployeeQuestions } = require('./helper/inquirerQuestions');
 
 // create connection with mysql server
 const db = mysql.createConnection(
@@ -54,7 +54,7 @@ const pickSQL = function(answer) {
 
           })
         } else {
-          console.log("uh oh spaghetti-oh");
+          console.log("uh oh spaghetti-oh at dept");
         }
     })
   } else if (answer === "Add a role") {
@@ -70,18 +70,46 @@ const pickSQL = function(answer) {
             } else {
               console.log("Success!");
             }
-
           })
         } else {
-          console.log("uh oh spaghetti-oh");
+          console.log("uh oh spaghetti-oh at role");
         }
     })
     // add an employee
   } else if (answer === "Add an employee") {
     prompt(newEmployeeQuestions)
-      .then(answers => )
+      .then(answers => {
+        const { first_name, last_name, manager, role } = answers;
+
+        if (first_name && last_name && manager && role) {
+
+          db.query(insertEmployee, [first_name, last_name, manager, role], (err, result) => {
+            if (err) {
+              console.error(`Here's the error: ${err}`);
+            } else {
+              console.log("Success!");
+            }
+          })
+        } else {
+          console.log("uh oh spaghetti-oh at employee")
+        }
+
+      })
     // update an employee role
   } else if (answer === "Update an employee role") {
+    const { employee, newRole } = answers;
+
+    if (employee && newRole) {
+      db.query(updateEmployeeRole, [newRole, employee], (err, result) => {
+        if (err) {
+          console.error(`Here's the error: ${err}`);
+        } else {
+          console.log("Success!");
+        }
+      })
+    } else {
+      console.log("uh oh spaghettit-oh at employee update")
+    }
 
   }
 }

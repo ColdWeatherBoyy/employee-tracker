@@ -42,5 +42,26 @@ const insertRole = `
   VALUES (?, ?, ?)
 `;
 
+const insertEmployee = `
+  INSERT INTO employee (first_name, last_name, role_id, manager_id) 
+  VALUES (?, ?, ?, ?)
+`;
+
+const updateEmployeeRole = `
+  UPDATE employee 
+  SET role_id = ?
+  WHERE id = ?
+`;
+
+// const deptChoices = 
+//   db.query(selectDepts, (err, results) => {
+//   if (err) {
+//     console.error(`Here's the error: ${err}`);
+//   } else {
+//     return results.map(department => ({ name: department.name, value: department.id }));
+//   }
+// });
+
+
 // export
-module.exports = { selectDepts, selectRoles, selectEmployees, insertDept, insertRole };
+module.exports = { selectDepts, selectRoles, selectEmployees, insertDept, insertRole, insertEmployee, updateEmployeeRole };

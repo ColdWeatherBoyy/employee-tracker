@@ -66,46 +66,77 @@ const newRoleQuestions = [
 // inquirer set of questions for adding a new employee
 const newEmployeeQuestions = [
   {
+    type: "input",
+    message: "Please enter a first name betwen 0 and 30 characters.",
+    name: "first_name",
+    validate: function (input) {
+      if (input < 0 || input > 30) {
+        return "Must be between 0 and 30 characters long.";
+      } else {
+        return true;
+      }
+    }
+  },
+  {
+    type: "input",
+    message: "Please enter a last name betwen 0 and 30 characters.",
+    name: "last_name",
+    validate: function (input) {
+      if (input < 0 || input > 30) {
+        return "Must be between 0 and 30 characters long.";
+      } else {
+        return true;
+      }
+    }
+  },
+  {
     type: "list",
-    message: "What department?",
-    choices: 
-      db.query(selectDepts, (err, results) => {
-        if (err) {
-          console.error(`Here's the error: ${err}`);
-        } else {
-          departmentChoices = results.map(department => ({ name: department.name, value: department.id }));
-        }
-      }),
-    name: "department"
+    message: "Please select an available manager.",
+    name: "manager",
+    choices: [
+      { name: "Julia Gribbins", value: 1 },
+      { name: "Michael Statler", value: 3 },
+      { name: "Luther Punchins", value: 5 },
+      { name: "Happy Bappletine", value: 7 }
+    ],
   },
   {
-    type: "input",
-    message: "What title? Please enter a title 10 and 100 characters long.",
-    name: "title",
-    validate: function (input) {
-      if (input < 10 || input > 100) {
-        return "Please enter a title between 0 and 100 characters long.";
-      } else {
-        return true;
-      }
-    }
-  },
-  {
-    type: "input",
-    message: "What salary (no decimals allowed)?",
-    name: "salary",
-    validate: function (input) {
-      if (input.length > 5 && input.length < 8 && /^\d+$/.test(input)) {
-        return true;
-      } else {
-        return "Only numbers (no commas) and must between 5 and 8 digits long."
-      }
-    }
+    type: "list",
+    message: "Please select new role.",
+    name: "role",
+    choices: [
+      { name: "eCommerce Coordinator", value: 1 },
+      { name: "Operations Coordinator", value: 3 },
+      { name: "Marketing Coordinator", value: 5 },
+      { name: "Sales Coordinator", value: 7 }
+    ],
   },
 ];
 
-
-
+const updateEmployeeQuestions = [
+  {
+    type: "options",
+    message: "Please select an employee to update role.",
+    name: "employee",
+    choices: [
+      { name: "Jimmy Besancon", value: 2},
+      { name: "Roger Lundler", value: 4},
+      { name: "Mikayla Prindle", value: 6},
+      { name: "Carter Lundquist", value: 8}
+    ]
+  },
+  {
+    type: "options",
+    message: "What is their new role?.",
+    name: "newRole",
+    choices: [
+      { name: "eCommerce Manager", value: 2 },
+      { name: "Operations Manager", value: 4 },
+      { name: "Marketing Manager", value: 6 },
+      { name: "Sales Manager", value: 8 }
+    ]
+  }
+]
 
 // exports
-module.exports = { questions, newDeptQuestions, newRoleQuestions, newEmployeeQuestions };
+module.exports = { questions, newDeptQuestions, newRoleQuestions, newEmployeeQuestions, updateEmployeeQuestions };
