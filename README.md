@@ -16,7 +16,7 @@ Please install Node.js and the NPM packages inquirer 8.2.4 and mysql2 to use. Yo
 Once installed, run node index.js, and the application will begin in the Command Line.
 
 
-![screenshot of inquirer response](images/screenshot.png)
+![screenshot of inquirer response](./images/Screenshot.png)
 
 ## Credits
 
