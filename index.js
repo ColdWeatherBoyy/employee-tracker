@@ -1,8 +1,10 @@
 // import in all needed dependencies, like inquirer, mysql, fs, path, and helped js files
 const { prompt } = require('inquirer');
 const mysql = require('mysql2');
-const fs = require('fs');
-const path = require('path');
+// const fs = require('fs');
+// const path = require('path');
+const cTable = require('console.table');
+
 // SQL commands
 const { selectDepts, selectRoles, selectEmployees, insertDept, insertRole, insertEmployee, updateEmployeeRole } = require('./helper/sqlCommands');
 const { questions, newDeptQuestions, newRoleQuestions, newEmployeeQuestions, updateEmployeeQuestions } = require('./helper/inquirerQuestions');
@@ -18,14 +20,18 @@ const db = mysql.createConnection(
 )
 
 // function to allow dynamic reading of seeds file after database connection is made
-const seeds = fs.readFileSync(path.join(__dirname, 'db/seeds.sql'), "utf8");
+// const seeds = fs.readFileSync(path.join(__dirname, 'db/seeds.sql'), "utf8");
 
 // Large if else  to determine what SQL command gets run given inquirer answers
 const pickSQL = function(answer) {
   // view all departments
   if (answer === "View all departments") {
     db.query(selectDepts, function (err, results) {
-      console.table(results);
+      if (err) {
+        console.error(err);
+      } else {
+        console.table(results);
+      }
     });
     // view all roles
   } else if (answer === "View all roles") {
@@ -97,36 +103,41 @@ const pickSQL = function(answer) {
       })
     // update an employee role
   } else if (answer === "Update an employee role") {
-    const { employee, newRole } = answers;
+    prompt(updateEmployeeQuestions)
+      .then(answers => {
+        const { employee, newRole } = answers;
 
-    if (employee && newRole) {
-      db.query(updateEmployeeRole, [newRole, employee], (err, result) => {
-        if (err) {
-          console.error(`Here's the error: ${err}`);
+        if (employee && newRole) {
+          db.query(updateEmployeeRole, [newRole, employee], (err, result) => {
+            if (err) {
+              console.error(`Here's the error: ${err}`);
+            } else {
+              console.log("Success!");
+            }
+          })
         } else {
-          console.log("Success!");
+          console.log("uh oh spaghettit-oh at employee update")
         }
       })
-    } else {
-      console.log("uh oh spaghettit-oh at employee update")
-    }
-
   }
 }
 // init function to control what happens on page load
 const init = function () {
 
   // query statement to run seeds SQL command
-  db.query(seeds, (err, result) => {
-    if (err) {
-      console.log(err);
-    }
-    console.log('Script executed');
-  });
+  // db.query(seeds, (err, result) => {
+  //   if (err) {
+  //     console.log(err);
+  //   }
+  //   console.log('Script executed');
+  // });
 
   // initial inquirer prompt
   prompt(questions)
-    .then((answer) => pickSQL(answer[0]));
+    .then((answer) => {
+      console.log(answer.selection);
+      pickSQL(answer.selection);
+    });
 }
 
 // call to init

@@ -1,5 +1,5 @@
 // SELECT SQL command for showing department tables
-const selectDepts = "SELECT * FROM departments;"
+const selectDepts = "SELECT id as ID, name AS Department_Name FROM department;"
 
 // SELECT and JOIN for showing roles with joined data
 const selectRoles = `

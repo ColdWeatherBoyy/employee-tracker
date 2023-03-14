@@ -5,7 +5,8 @@ const questions = [
   {
     type: "list",
     message: "Select from options below, please!",
-    choices: ["View all departments", "View all roles", "View all employees", "Add a role", "Add an employee", "Update an employee role"]
+    choices: ["View all departments", "View all roles", "View all employees", "Add a role", "Add an employee", "Update an employee role"],
+    name: "selection"
   }
 ];
 
@@ -51,10 +52,10 @@ const newRoleQuestions = [
   },
   {
     type: "input",
-    message: "What salary (no decimals allowed)?",
+    message: "What salary (no decimals allowed and don't add a comma please)?",
     name: "salary",
     validate: function (input) {
-      if (input.length > 5 && input.length < 8 && /^\d+$/.test(input)) {
+      if (input.length >= 5 && input.length <= 8 && /^\d+$/.test(input)) {
         return true;
       } else {
         return "Only numbers (no commas) and must between 5 and 8 digits long."
@@ -112,10 +113,9 @@ const newEmployeeQuestions = [
     ],
   },
 ];
-
 const updateEmployeeQuestions = [
   {
-    type: "options",
+    type: "list",
     message: "Please select an employee to update role.",
     name: "employee",
     choices: [
@@ -126,7 +126,7 @@ const updateEmployeeQuestions = [
     ]
   },
   {
-    type: "options",
+    type: "list",
     message: "What is their new role?.",
     name: "newRole",
     choices: [
