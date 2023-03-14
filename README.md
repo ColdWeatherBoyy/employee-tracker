@@ -2,7 +2,7 @@
 
 ## Description
 
-Video Walkthrough.
+Video Walkthrough can be found [here](https://drive.google.com/file/d/1BCXoRolB7xxIAvhk7cXv8DRT5KepQ7In/view).
 
 This is an application designed to practice skills with SQL, Node.js, and the inquirer package (with preparation for doing the same work with APIs and Express). It shows the basic functionality of working with an SQL datbase to manage employee records. Future applications would of course require a front end, but this provided a great way to gain comfort with these systems.
 
