@@ -1,0 +1,47 @@
+const questions = [
+  {
+    type: "list",
+    message: "Select from options below, please!",
+    choices: ["View all departments", "View all roles", "View all employees", "Add a role", "Add an employee", "Update an employee role"]
+  }
+];
+
+const newRoleQuestions = [
+  {
+    type: "list",
+    message: "What department?",
+    choices: [
+      { name: "eCommerce", value: 1 },
+      { name: "Operations", value: 2 },
+      { name: "Marketing", value: 3 },
+      { name: "Sales", value: 4 }
+    ],
+    name: "department"
+  },
+  {
+    type: "input",
+    message: "What title? Please enter a title 10 and 100 characters long.",
+    name: "title",
+    validate: function (input) {
+      if (input < 10 || input > 100) {
+        return "Please enter a title 10 and 100 characters long.";
+      } else {
+        return true;
+      }
+    }
+  },
+  {
+    type: "input",
+    message: "What salary (no decimals allowed)?",
+    name: "salary",
+    validate: function (input) {
+      if (input.length > 5 && input.length < 8 && /^\d+$/.test(input)) {
+        return true;
+      } else {
+        return "Only numbers (no commas) and must between 5 and 8 digits long."
+      }
+    }
+  },
+];
+
+module.exports = { questions, newRoleQuestions};
