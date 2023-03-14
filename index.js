@@ -31,17 +31,28 @@ const pickSQL = function(answer) {
         console.error(err);
       } else {
         console.table(results);
+        prompt(questions).then((answer) => {pickSQL(answer.selection)});
       }
     });
     // view all roles
   } else if (answer === "View all roles") {
     db.query(selectRoles, function (err, results) {
-      console.table(results);
+      if (err) {
+        console.error(err);
+      } else {
+        console.table(results);
+        prompt(questions).then((answer) => {pickSQL(answer.selection)});
+      }
     });
     // view all employees
   } else if (answer === "View all employees") {
     db.query(selectEmployees, function (err, results) {
-      console.table(results);
+      if (err) {
+        console.error(err);
+      } else {
+        console.table(results);
+        prompt(questions).then((answer) => {pickSQL(answer.selection)});
+      }
     });
     // add a dept
   } else if (answer === "Add a dept") {
@@ -56,6 +67,7 @@ const pickSQL = function(answer) {
               console.error(`Here's the error: ${err}`);
             } else {
               console.log("Success!");
+              prompt(questions).then((answer) => {pickSQL(answer.selection)});
             }
 
           })
@@ -75,6 +87,7 @@ const pickSQL = function(answer) {
               console.error(`Here's the error: ${err}`);
             } else {
               console.log("Success!");
+              prompt(questions).then((answer) => {pickSQL(answer.selection)});
             }
           })
         } else {
@@ -94,6 +107,7 @@ const pickSQL = function(answer) {
               console.error(`Here's the error: ${err}`);
             } else {
               console.log("Success!");
+              prompt(questions).then((answer) => {pickSQL(answer.selection)});
             }
           })
         } else {
@@ -113,6 +127,7 @@ const pickSQL = function(answer) {
               console.error(`Here's the error: ${err}`);
             } else {
               console.log("Success!");
+              prompt(questions).then((answer) => {pickSQL(answer.selection)});
             }
           })
         } else {
@@ -135,7 +150,6 @@ const init = function () {
   // initial inquirer prompt
   prompt(questions)
     .then((answer) => {
-      console.log(answer.selection);
       pickSQL(answer.selection);
     });
 }
