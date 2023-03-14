@@ -1,5 +1,3 @@
-const { selectDepts } = require("./sqlCommands");
-
 // Question for initial inquirer prompt
 const questions = [
   {

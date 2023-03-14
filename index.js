@@ -1,26 +1,11 @@
 // import in all needed dependencies, like inquirer, mysql, fs, path, and helped js files
 const { prompt } = require('inquirer');
-const mysql = require('mysql2');
-// const fs = require('fs');
-// const path = require('path');
+const db = require('./db/connection')
 const cTable = require('console.table');
 
 // SQL commands
 const { selectDepts, selectRoles, selectEmployees, insertDept, insertRole, insertEmployee, updateEmployeeRole } = require('./helper/sqlCommands');
 const { questions, newDeptQuestions, newRoleQuestions, newEmployeeQuestions, updateEmployeeQuestions } = require('./helper/inquirerQuestions');
-
-// create connection with mysql server
-const db = mysql.createConnection(
-  {
-    host: 'localhost',
-    user: 'root',
-    password: 'ColinSpr0wsSux!',
-    database: 'employee_db'
-  }
-)
-
-// function to allow dynamic reading of seeds file after database connection is made
-// const seeds = fs.readFileSync(path.join(__dirname, 'db/seeds.sql'), "utf8");
 
 // Large if else  to determine what SQL command gets run given inquirer answers
 const pickSQL = function(answer) {
@@ -139,14 +124,6 @@ const pickSQL = function(answer) {
 // init function to control what happens on page load
 const init = function () {
 
-  // query statement to run seeds SQL command
-  // db.query(seeds, (err, result) => {
-  //   if (err) {
-  //     console.log(err);
-  //   }
-  //   console.log('Script executed');
-  // });
-
   // initial inquirer prompt
   prompt(questions)
     .then((answer) => {
@@ -156,3 +133,5 @@ const init = function () {
 
 // call to init
 init();
+
+
