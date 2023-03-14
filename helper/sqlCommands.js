@@ -1,4 +1,7 @@
+// SELECT SQL command for showing department tables
 const selectDepts = "SELECT * FROM departments;"
+
+// SELECT and JOIN for showing roles with joined data
 const selectRoles = `
   SELECT 
     title AS Job_Title, 
@@ -10,6 +13,7 @@ const selectRoles = `
   ON department.id = role.department_id;
 `;
 
+// SELECT and JOIN for showing employees table with joined data
 const selectEmployees = `
   SELECT 
     employee.id AS Employee_ID, 
@@ -28,5 +32,15 @@ const selectEmployees = `
     ON employee.manager_id = manager.id;
 `;
 
+const insertDept = `
+  INSERT INTO department (name)
+  VALUES (?)
+`;
 
-module.exports = {selectDepts, selectRoles, selectEmployees};
+const insertRole = `
+  INSERT INTO role (title, salary, department_id) 
+  VALUES (?, ?, ?)
+`;
+
+// export
+module.exports = { selectDepts, selectRoles, selectEmployees, insertDept, insertRole };

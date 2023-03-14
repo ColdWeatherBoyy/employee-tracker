@@ -1,13 +1,16 @@
 DROP DATABASE IF EXISTS employee_db;
 CREATE DATABASE employee_db;
 
+-- selects database
 use employee_db;
 
+-- department table creation
 CREATE TABLE department (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(30) NOT NULL
 );
 
+-- role table creation
 CREATE TABLE role (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(30) NOT NULL,
@@ -16,6 +19,7 @@ CREATE TABLE role (
   FOREIGN KEY (department_id) REFERENCES department(id)
 );
 
+-- employee table creation
 CREATE TABLE employee (
   id INT AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(30) NOT NULL,

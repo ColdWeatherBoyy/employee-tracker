@@ -1,3 +1,4 @@
+-- seed data for department table
 INSERT INTO department (name)
 VALUES
   ("eCommerce"),
@@ -5,6 +6,7 @@ VALUES
   ("Marketing"),
   ("Sales");
 
+-- seed data for role table
 INSERT INTO role (title, salary, department_id)
 VALUES
   ("eCommerce Coordinator", 41000, 1),
@@ -16,6 +18,7 @@ VALUES
   ("Sales Coordinator", 410000, 4),
   ("Sales Manager", 79000, 4);
 
+-- seed data for employee table
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
   ("Julia", "Gribbins", 2, null),

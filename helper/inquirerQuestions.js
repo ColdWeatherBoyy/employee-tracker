@@ -1,3 +1,4 @@
+// Question for initial inquirer prompt
 const questions = [
   {
     type: "list",
@@ -6,6 +7,7 @@ const questions = [
   }
 ];
 
+// inquirer set of questions for adding a new role
 const newRoleQuestions = [
   {
     type: "list",
@@ -24,7 +26,7 @@ const newRoleQuestions = [
     name: "title",
     validate: function (input) {
       if (input < 10 || input > 100) {
-        return "Please enter a title 10 and 100 characters long.";
+        return "Please enter a title between 0 and 100 characters long.";
       } else {
         return true;
       }
@@ -44,4 +46,20 @@ const newRoleQuestions = [
   },
 ];
 
-module.exports = { questions, newRoleQuestions};
+const newDeptQuestions = [
+  {
+    type: "input",
+    message: "What's the new department? Must be between 5-100 characters.",
+    name: "department",
+    validate: function(input) {
+      if (input < 5 || input > 100) {
+        return "Please enter a department between 5 and 100 characters long.";
+      } else {
+        return true;
+      }}
+  }
+]
+
+
+// exports
+module.exports = { questions, newDeptQuestions, newRoleQuestions };
